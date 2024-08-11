@@ -1,5 +1,5 @@
 from django.db import models
-from apps.users.models import Realtor
+from apps.users.models import User
 
 
 class District(models.Model):

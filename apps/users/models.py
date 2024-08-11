@@ -3,21 +3,12 @@ from django.contrib.auth.models import AbstractUser
 
 
 class User(AbstractUser):
-    pass
+    class UserType(models.TextChoices):
+        REALTOR = 'realtor', 'Риелтор'
 
-
-class Realtor(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='realtor')
-    name = models.CharField(max_length=120, verbose_name='Имя')
-    lastname = models.CharField(max_length=120, verbose_name='Фамилия')
-    phone_number = models.CharField(max_length=15, verbose_name='Номер телефона')
-    status = models.CharField(max_length=100, verbose_name='Статус')
+    name = models.CharField(max_length=120, verbose_name='Имя', null=True, blank=True)
+    lastname = models.CharField(max_length=120, verbose_name='Фамилия', blank=True, null=True)
+    phone_number = models.CharField(max_length=15, verbose_name='Номер телефона', blank=True, null=True)
+    status = models.CharField(max_length=100, verbose_name='Статус', blank=True, null=True)
     photo = models.ImageField(verbose_name='Фото', upload_to='photos/%Y/%m', blank=True, null=True)
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        verbose_name = 'Риелтор'
-        verbose_name_plural = 'Риелторы'
 
