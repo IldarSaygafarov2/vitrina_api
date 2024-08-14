@@ -2,13 +2,21 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 
 
-class User(AbstractUser):
-    class UserType(models.TextChoices):
-        REALTOR = 'realtor', 'Риелтор'
+class UserType(models.TextChoices):
+    REALTOR = 'realtor', 'Риелтор'
+    SIMPLE_ADMIN = 'simple_admin', 'Простой админ'
+    GROUP_DIRECTOR = 'group_director', 'Руководитель'
 
-    name = models.CharField(max_length=120, verbose_name='Имя', null=True, blank=True)
-    lastname = models.CharField(max_length=120, verbose_name='Фамилия', blank=True, null=True)
+    __empty__ = ''
+
+
+class User(AbstractUser):
     phone_number = models.CharField(max_length=15, verbose_name='Номер телефона', blank=True, null=True)
+    tg_username = models.CharField(max_length=80, verbose_name='Юзернейм из телеграма', null=True)
     status = models.CharField(max_length=100, verbose_name='Статус', blank=True, null=True)
+    user_type = models.CharField(max_length=100, choices=UserType.choices, null=True)
     photo = models.ImageField(verbose_name='Фото', upload_to='photos/%Y/%m', blank=True, null=True)
+
+    def __str__(self):
+        return f'{self.first_name} {self.last_name}'
 
