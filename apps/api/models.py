@@ -1,5 +1,15 @@
 from django.db import models
-# from apps.users.models import CustomUser
+
+
+class Category(models.Model):
+    name = models.CharField(max_length=100, unique=True, verbose_name='Название')
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Категория'
+        verbose_name_plural = 'Категории'
 
 
 class District(models.Model):
@@ -22,10 +32,11 @@ class Advertisement(models.Model):
         WITH = 'with', 'С ремонтом'
         WITHOUT = 'without', 'Коробка без ремонта'
 
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, verbose_name='Заголовок')
     description = models.TextField(verbose_name='Описание')
     district = models.ForeignKey(District, on_delete=models.CASCADE, related_name='districts', verbose_name='Район')
-    property_type = models.CharField(max_length=100, choices=PropertyTypeChoices.choices, verbose_name='Тип недвижимости')
+    property_type = models.CharField(max_length=100, choices=PropertyTypeChoices.choices,
+                                     verbose_name='Тип недвижимости')
     price = models.IntegerField(verbose_name='Цена')
     rooms_qty_from = models.PositiveSmallIntegerField(verbose_name='Кол-во комнат от')
     rooms_qty_to = models.PositiveSmallIntegerField(verbose_name='Кол-во комнат до')
@@ -33,8 +44,11 @@ class Advertisement(models.Model):
     quadrature_to = models.PositiveSmallIntegerField(verbose_name='Квадратура до')
     floor_from = models.PositiveSmallIntegerField(verbose_name='Этаж от')
     floor_to = models.PositiveSmallIntegerField(verbose_name='Этаж до')
-    repair_type = models.CharField(verbose_name='Ремонт', max_length=100)
+    repair_type = models.CharField(verbose_name='Ремонт', max_length=100, choices=RepairTypeChoices.choices,
+                                   default=RepairTypeChoices.WITH)
     auction_allowed = models.BooleanField(default=False, verbose_name='Торг уместен?')
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, related_name='advertisements',
+                                 verbose_name='Категория')
 
     def __str__(self):
         return self.name
