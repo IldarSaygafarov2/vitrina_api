@@ -31,4 +31,6 @@ class DistrictListView(generics.ListAPIView):
 class CategoryViewSet(viewsets.ModelViewSet):
     queryset = models.Category.objects.all()
     serializer_class = serializers.CategorySerializer
+    lookup_url_kwarg = 'slug'
+    lookup_field = 'slug'
 

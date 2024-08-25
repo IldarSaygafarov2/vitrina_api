@@ -17,15 +17,15 @@ class DistrictSerializer(serializers.ModelSerializer):
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Category
-        fields = ['id', 'name']
+        fields = ['id', 'name', 'slug']
 
 
 class AdvertisementSerializer(serializers.ModelSerializer):
     property_type = serializers.SerializerMethodField(method_name='get_property_type_display')
     repair_type = serializers.SerializerMethodField(method_name='get_repair_type_display')
-    gallery = AdvertisementGallerySerializer(many=True)
-    district = serializers.PrimaryKeyRelatedField(read_only=True)
-    category = serializers.PrimaryKeyRelatedField(read_only=True)
+    gallery = AdvertisementGallerySerializer(many=True, required=False)
+    # district = serializers.PrimaryKeyRelatedField(read_only=True)
+    # category = serializers.PrimaryKeyRelatedField(read_only=True)
 
     class Meta:
         model = models.Advertisement
