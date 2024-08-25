@@ -19,6 +19,7 @@ class AdvertisementAdmin(admin.ModelAdmin):
 class DistrictAdmin(admin.ModelAdmin):
     list_display = ['id', 'name']
     list_display_links = ['id', 'name']
+    prepopulated_fields = {'slug': ('name',)}
 
 
 class CategoryAdmin(admin.ModelAdmin):

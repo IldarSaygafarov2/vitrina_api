@@ -11,7 +11,7 @@ class AdvertisementGallerySerializer(serializers.ModelSerializer):
 class DistrictSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.District
-        fields = ['id', 'name']
+        fields = ['id', 'name', 'slug']
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -21,11 +21,11 @@ class CategorySerializer(serializers.ModelSerializer):
 
 
 class AdvertisementSerializer(serializers.ModelSerializer):
-    district = DistrictSerializer(many=False)
     property_type = serializers.SerializerMethodField(method_name='get_property_type_display')
     repair_type = serializers.SerializerMethodField(method_name='get_repair_type_display')
     gallery = AdvertisementGallerySerializer(many=True)
-    category = CategorySerializer(many=False)
+    district = serializers.PrimaryKeyRelatedField(read_only=True)
+    category = serializers.PrimaryKeyRelatedField(read_only=True)
 
     class Meta:
         model = models.Advertisement
@@ -55,5 +55,16 @@ class AdvertisementSerializer(serializers.ModelSerializer):
     @staticmethod
     def get_repair_type_display(obj) -> str:
         return obj.get_repair_type_display()
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        district = models.District.objects.get(id=instance.district.id)
+        category = models.Category.objects.get(id=instance.category.id)
+        district_serializer = DistrictSerializer(district)
+        category_serializer = CategorySerializer(category)
+        data['district'] = district_serializer.data
+        data['category'] = category_serializer.data
+        return data
+
 
 
