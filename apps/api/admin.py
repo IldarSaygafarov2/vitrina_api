@@ -28,6 +28,12 @@ class CategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name',)}
 
 
+class UserRequestAdmin(admin.ModelAdmin):
+    list_display = ['id', 'first_name', 'email', 'phone_number', 'operation_type', 'object_type']
+    list_display_links = ['id', 'first_name']
+
+
 admin.site.register(models.Advertisement, AdvertisementAdmin)
 admin.site.register(models.District, DistrictAdmin)
 admin.site.register(models.Category, CategoryAdmin)
+admin.site.register(models.UserRequest, UserRequestAdmin)

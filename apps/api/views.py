@@ -6,6 +6,7 @@ from rest_framework.response import Response
 
 from . import serializers, models
 from .filters import AdvertisementFilter
+from .models import UserRequest
 
 
 class DisrtrictViewSet(viewsets.ModelViewSet):
@@ -40,3 +41,7 @@ class CategoryViewSet(viewsets.ModelViewSet):
     lookup_url_kwarg = 'slug'
     lookup_field = 'slug'
 
+
+class UserRequestCreateView(generics.CreateAPIView):
+    serializer_class = serializers.UserRequestSerializer
+    queryset = UserRequest.objects.all()

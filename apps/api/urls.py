@@ -9,7 +9,7 @@ router.register(r'advertisements', views.AdvertisementViewSet)
 router.register(r'districts', views.DisrtrictViewSet)
 
 urlpatterns = [
-
+    path('request/add/', views.UserRequestCreateView.as_view())
 ]
 
 urlpatterns += router.urls

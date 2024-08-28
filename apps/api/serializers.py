@@ -65,4 +65,7 @@ class AdvertisementSerializer(serializers.ModelSerializer):
         return data
 
 
-
+class UserRequestSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.UserRequest
+        fields = ['id', 'first_name', 'operation_type', 'object_type', 'phone_number', 'email', 'message']

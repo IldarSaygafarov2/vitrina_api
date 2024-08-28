@@ -74,3 +74,19 @@ class Advertisement(models.Model):
 class AdvertisementGallery(models.Model):
     advertisement = models.ForeignKey(Advertisement, on_delete=models.CASCADE, related_name='gallery')
     photo = models.ImageField(verbose_name='Фото', upload_to='gallery')
+
+
+class UserRequest(models.Model):
+    first_name = models.CharField(verbose_name='Имя', max_length=100)
+    operation_type = models.CharField(verbose_name='Тип операции', max_length=100)
+    object_type = models.CharField(verbose_name='Тип объекта', max_length=100)
+    phone_number = models.CharField(verbose_name='Номер телефона', max_length=15)
+    email = models.EmailField(verbose_name='Email')
+    message = models.TextField(verbose_name='Примечание')
+
+    def __str__(self):
+        return f'{self.first_name}:{self.phone_number}'
+
+    class Meta:
+        verbose_name = 'Заявка пользователя'
+        verbose_name_plural = 'Заявки пользователей'
