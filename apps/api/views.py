@@ -18,15 +18,15 @@ class DisrtrictViewSet(viewsets.ModelViewSet):
 
 # @extend_schema(tags=['Объявления'])
 class AdvertisementViewSet(viewsets.ModelViewSet):
-    parser_classes = (MultiPartParser, )
+    # parser_classes = (MultiPartParser, )
     queryset = models.Advertisement.objects.all()
     serializer_class = serializers.AdvertisementSerializer
     filter_backends = (DjangoFilterBackend,)
     filterset_class = AdvertisementFilter
 
-    def create(self, request, *args, **kwargs):
-        print(request.data, request.FILES, args, kwargs)
-        return super().create(request, *args, **kwargs)
+    # def create(self, request, *args, **kwargs):
+    #     print(request.data, request.FILES, args, kwargs)
+    #     return super().create(request, *args, **kwargs)
 
 
 class DistrictListView(generics.ListAPIView):
