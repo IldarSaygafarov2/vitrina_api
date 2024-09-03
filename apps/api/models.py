@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils.text import slugify
 
+from apps.users.models import User
+
 
 class Category(models.Model):
     name = models.CharField(max_length=100, unique=True, verbose_name='Название')
@@ -43,11 +45,15 @@ class Advertisement(models.Model):
 
     class RepairTypeChoices(models.TextChoices):
         WITH = 'with', 'С ремонтом'
-        WITHOUT = 'without', 'Коробка без ремонта'
+        WITHOUT = 'without', 'Без ремонта'
+        DESIGNED = 'designed', 'Дизайнерский ремонт'
+        ROUGH = 'rough', 'Черновая'
+        PRE_FINISHED = 'pre_finished', 'Предчистовая'
 
     name = models.CharField(max_length=100, verbose_name='Заголовок')
     description = models.TextField(verbose_name='Описание')
     district = models.ForeignKey(District, on_delete=models.CASCADE, related_name='districts', verbose_name='Район')
+    address = models.CharField(verbose_name='Адрес', max_length=200, null=True, blank=True)
     property_type = models.CharField(max_length=100, choices=PropertyTypeChoices.choices,
                                      verbose_name='Тип недвижимости')
     price = models.IntegerField(verbose_name='Цена')
@@ -90,3 +96,21 @@ class UserRequest(models.Model):
     class Meta:
         verbose_name = 'Заявка пользователя'
         verbose_name_plural = 'Заявки пользователей'
+
+
+class AdvertisementRequestForModeration(models.Model):
+    class RequestStatus(models.TextChoices):
+        MODERATION = 'moderation', 'На модерации'
+        COMPLETED = 'completed', 'Прошло модерацию'
+
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, verbose_name='Риелтор')
+    advertisement = models.ForeignKey(Advertisement, on_delete=models.CASCADE, related_name='requests')
+    status = models.CharField(max_length=30, choices=RequestStatus.choices, default=RequestStatus.MODERATION,
+                              verbose_name='Статус объявления')
+
+    def __str__(self):
+        return f'Объявление {self.advertisement.name} от {self.user.first_name}'
+
+    class Meta:
+        verbose_name = 'Объявление для модерации'
+        verbose_name_plural = 'Объявления для модерации'

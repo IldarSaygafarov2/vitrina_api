@@ -32,6 +32,7 @@ class AdvertisementSerializer(serializers.ModelSerializer):
             'name',
             'description',
             'district',
+            'address',
             'property_type',
             'price',
             'rooms_qty_from',
@@ -63,6 +64,7 @@ class AdvertisementSerializer(serializers.ModelSerializer):
         data['repair_type'] = instance.get_repair_type_display()
         data['property_type'] = instance.get_property_type_display()
         return data
+
 
 
 class UserRequestSerializer(serializers.ModelSerializer):

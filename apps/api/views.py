@@ -1,12 +1,9 @@
 from django_filters.rest_framework import DjangoFilterBackend
 from drf_spectacular.utils import extend_schema
 from rest_framework import viewsets, generics
-from rest_framework.parsers import MultiPartParser
-from rest_framework.response import Response
 
 from . import serializers, models
 from .filters import AdvertisementFilter
-from .models import UserRequest
 
 
 class DisrtrictViewSet(viewsets.ModelViewSet):
@@ -25,8 +22,10 @@ class AdvertisementViewSet(viewsets.ModelViewSet):
     filterset_class = AdvertisementFilter
 
     # def create(self, request, *args, **kwargs):
-    #     print(request.data, request.FILES, args, kwargs)
-    #     return super().create(request, *args, **kwargs)
+    #     serializer = self.get_serializer(data=request.data)
+    #     serializer.is_valid(raise_exception=True)
+    #     self.perform_create(serializer)
+
 
 
 class DistrictListView(generics.ListAPIView):
@@ -44,4 +43,4 @@ class CategoryViewSet(viewsets.ModelViewSet):
 
 class UserRequestCreateView(generics.CreateAPIView):
     serializer_class = serializers.UserRequestSerializer
-    queryset = UserRequest.objects.all()
+    queryset = models.UserRequest.objects.all()

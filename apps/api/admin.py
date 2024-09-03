@@ -33,7 +33,12 @@ class UserRequestAdmin(admin.ModelAdmin):
     list_display_links = ['id', 'first_name']
 
 
+class AdvertisementRequestForModerationAdmin(admin.ModelAdmin):
+    list_display = ['id', 'advertisement', 'user', 'status']
+
+
 admin.site.register(models.Advertisement, AdvertisementAdmin)
 admin.site.register(models.District, DistrictAdmin)
 admin.site.register(models.Category, CategoryAdmin)
 admin.site.register(models.UserRequest, UserRequestAdmin)
+admin.site.register(models.AdvertisementRequestForModeration, AdvertisementRequestForModerationAdmin)
