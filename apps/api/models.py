@@ -57,14 +57,16 @@ class Advertisement(models.Model):
     property_type = models.CharField(max_length=100, choices=PropertyTypeChoices.choices,
                                      verbose_name='Тип недвижимости')
     price = models.IntegerField(verbose_name='Цена')
+    is_studio = models.BooleanField(verbose_name='Студия ?', default=False)
     rooms_qty_from = models.PositiveSmallIntegerField(verbose_name='Кол-во комнат от')
     rooms_qty_to = models.PositiveSmallIntegerField(verbose_name='Кол-во комнат до')
     quadrature_from = models.PositiveSmallIntegerField(verbose_name='Квадратура от')
     quadrature_to = models.PositiveSmallIntegerField(verbose_name='Квадратура до')
     floor_from = models.PositiveSmallIntegerField(verbose_name='Этаж от')
     floor_to = models.PositiveSmallIntegerField(verbose_name='Этаж до')
-    repair_type = models.CharField(verbose_name='Ремонт', max_length=100, choices=RepairTypeChoices.choices,
-                                   default=RepairTypeChoices.WITH)
+    repair_type = models.CharField(verbose_name='Ремонт', max_length=100, choices=RepairTypeChoices.choices, null=True,
+                                   blank=True)
+    creation_year = models.IntegerField(verbose_name='Год постройки', default=0)
     auction_allowed = models.BooleanField(default=False, verbose_name='Торг уместен?')
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, related_name='advertisements',
                                  verbose_name='Категория')

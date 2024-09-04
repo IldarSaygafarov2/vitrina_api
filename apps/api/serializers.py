@@ -43,6 +43,8 @@ class AdvertisementSerializer(serializers.ModelSerializer):
             'floor_to',
             'repair_type',
             'auction_allowed',
+            'is_studio',
+            'creation_year',
             'category',
             'gallery',
         ]
@@ -64,7 +66,6 @@ class AdvertisementSerializer(serializers.ModelSerializer):
         data['repair_type'] = instance.get_repair_type_display()
         data['property_type'] = instance.get_property_type_display()
         return data
-
 
 
 class UserRequestSerializer(serializers.ModelSerializer):
