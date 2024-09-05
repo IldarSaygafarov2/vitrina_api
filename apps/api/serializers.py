@@ -21,8 +21,6 @@ class CategorySerializer(serializers.ModelSerializer):
 
 
 class AdvertisementSerializer(serializers.ModelSerializer):
-    # property_type = serializers.SerializerMethodField(method_name='get_property_type_display')
-    # repair_type = serializers.SerializerMethodField(method_name='get_repair_type_display')
     gallery = AdvertisementGallerySerializer(many=True, required=False)
 
     class Meta:
