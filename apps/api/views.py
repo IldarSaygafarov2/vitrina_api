@@ -21,12 +21,6 @@ class AdvertisementViewSet(viewsets.ModelViewSet):
     filter_backends = (DjangoFilterBackend,)
     filterset_class = AdvertisementFilter
 
-    # def create(self, request, *args, **kwargs):
-    #     serializer = self.get_serializer(data=request.data)
-    #     serializer.is_valid(raise_exception=True)
-    #     self.perform_create(serializer)
-
-
 
 class DistrictListView(generics.ListAPIView):
     queryset = models.District.objects.all()

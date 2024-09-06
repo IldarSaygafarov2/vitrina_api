@@ -38,6 +38,27 @@ class District(models.Model):
         verbose_name_plural = 'Районы'
 
 
+class AdvertisementRequestForModeration(models.Model):
+    # class RequestStatus(models.TextChoices):
+    #     MODERATION = 'moderation', 'На модерации'
+    #     COMPLETED = 'completed', 'Прошло модерацию'
+
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, verbose_name='Риелтор')
+    advertisement = models.ForeignKey("Advertisement", on_delete=models.CASCADE, related_name='requests')
+    is_moderated = models.BooleanField(default=False, verbose_name='Прошла модерацию?')
+    # status = models.CharField(max_length=30, choices=RequestStatus.choices, default=RequestStatus.MODERATION,
+    #                           verbose_name='Статус объявления')
+
+    def __str__(self):
+        return f'Объявление {self.advertisement.name} от {self.user.first_name}'
+
+    class Meta:
+        verbose_name = 'Объявление для модерации'
+        verbose_name_plural = 'Объявления для модерации'
+        ordering = ('is_moderated',)
+
+
+
 class Advertisement(models.Model):
     class PropertyTypeChoices(models.TextChoices):
         NEW = 'new', 'Новостройка'
@@ -70,9 +91,23 @@ class Advertisement(models.Model):
     auction_allowed = models.BooleanField(default=False, verbose_name='Торг уместен?')
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, related_name='advertisements',
                                  verbose_name='Категория')
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='advertisements',
+                             verbose_name='Риелтор')
+    is_moderated = models.BooleanField(verbose_name='Прошла модерацию?', default=False)
 
     def __str__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        for_moderation = AdvertisementRequestForModeration(
+            user=self.user,
+            advertisement_id=self.pk,
+            is_moderated=False
+        )
+
+        for_moderation.save()
+        return
 
     class Meta:
         verbose_name = 'Объявление'
@@ -100,19 +135,3 @@ class UserRequest(models.Model):
         verbose_name_plural = 'Заявки пользователей'
 
 
-class AdvertisementRequestForModeration(models.Model):
-    class RequestStatus(models.TextChoices):
-        MODERATION = 'moderation', 'На модерации'
-        COMPLETED = 'completed', 'Прошло модерацию'
-
-    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, verbose_name='Риелтор')
-    advertisement = models.ForeignKey(Advertisement, on_delete=models.CASCADE, related_name='requests')
-    status = models.CharField(max_length=30, choices=RequestStatus.choices, default=RequestStatus.MODERATION,
-                              verbose_name='Статус объявления')
-
-    def __str__(self):
-        return f'Объявление {self.advertisement.name} от {self.user.first_name}'
-
-    class Meta:
-        verbose_name = 'Объявление для модерации'
-        verbose_name_plural = 'Объявления для модерации'

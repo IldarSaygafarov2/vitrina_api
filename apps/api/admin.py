@@ -34,7 +34,10 @@ class UserRequestAdmin(admin.ModelAdmin):
 
 
 class AdvertisementRequestForModerationAdmin(admin.ModelAdmin):
-    list_display = ['id', 'advertisement', 'user', 'status']
+    list_display = ['id', 'advertisement', 'user', 'is_moderated']
+    list_display_links = ['id', 'advertisement']
+    list_editable = ['is_moderated']
+    list_filter = ['is_moderated']
 
 
 admin.site.register(models.Advertisement, AdvertisementAdmin)

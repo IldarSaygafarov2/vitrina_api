@@ -70,3 +70,9 @@ class UserRequestSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.UserRequest
         fields = ['id', 'first_name', 'operation_type', 'object_type', 'phone_number', 'email', 'message']
+
+
+class AdvertisementModeratedSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.AdvertisementRequestForModeration
+        fields = ['pk', 'user', 'advertisement', 'is_moderated']

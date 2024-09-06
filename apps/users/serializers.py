@@ -8,3 +8,10 @@ class IsUserRealtorSerializer(serializers.ModelSerializer):
         fields = ['user_type']
         read_only_fields = ['user_type']
 
+
+class UserIdSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id']
+
+
