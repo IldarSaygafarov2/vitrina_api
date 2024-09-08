@@ -9,10 +9,10 @@ class AdvertisementGalleryAdmin(admin.TabularInline):
 
 
 class AdvertisementAdmin(admin.ModelAdmin):
-    list_display = ['id', 'name', 'price', 'repair_type', 'district', 'category', 'property_type', 'auction_allowed']
+    list_display = ['id', 'name', 'price', 'repair_type', 'district', 'category', 'property_type', 'user']
     list_display_links = ['id', 'name']
     list_filter = ['repair_type', 'district', 'auction_allowed', 'property_type', 'category']
-    list_editable = ['repair_type', 'district', 'auction_allowed', 'property_type', 'category']
+    list_editable = ['repair_type', 'district', 'user', 'property_type', 'category']
     inlines = [AdvertisementGalleryAdmin]
 
 

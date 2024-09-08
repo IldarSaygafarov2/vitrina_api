@@ -3,7 +3,12 @@ from rest_framework.response import Response
 from rest_framework import generics
 
 from .models import User
-from .serializers import IsUserRealtorSerializer, UserIdSerializer
+from .serializers import IsUserRealtorSerializer, UserIdSerializer, UserSerializer
+
+
+class UserListView(generics.ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
 
 
 @api_view(['GET'])

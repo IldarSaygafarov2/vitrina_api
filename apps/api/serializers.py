@@ -5,7 +5,7 @@ from . import models
 class AdvertisementGallerySerializer(serializers.ModelSerializer):
     class Meta:
         model = models.AdvertisementGallery
-        fields = ['id', 'photo']
+        fields = ['id', 'advertisement', 'photo']
 
 
 class DistrictSerializer(serializers.ModelSerializer):
@@ -44,6 +44,7 @@ class AdvertisementSerializer(serializers.ModelSerializer):
             'is_studio',
             'creation_year',
             'category',
+            'user',
             'gallery',
         ]
 

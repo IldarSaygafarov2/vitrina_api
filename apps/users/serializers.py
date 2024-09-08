@@ -15,3 +15,15 @@ class UserIdSerializer(serializers.ModelSerializer):
         fields = ['id']
 
 
+class UserSerializer(serializers.ModelSerializer):
+    user_permissions = serializers.StringRelatedField(read_only=True, many=True)
+    has_perm_add = serializers.SerializerMethodField(method_name='get_has_perm_add')
+
+    class Meta:
+        model = User
+        fields = ['id', 'first_name', 'last_name', 'username', 'tg_username', 'phone_number', 'user_permissions',
+                  'user_type', 'has_perm_add']
+        read_only_fields = ['user_permissions']
+
+    def get_has_perm_add(self, instance: User):
+        print(instance.user_permissions.values())
