@@ -11,4 +11,4 @@ class AdvertisementFilter(FilterSet):
 
     class Meta:
         model = Advertisement
-        fields = ['auction_allowed', 'category', 'repair_type', 'property_type', 'district',]
+        fields = ['auction_allowed', 'category', 'repair_type', 'property_type', 'district', 'user']
