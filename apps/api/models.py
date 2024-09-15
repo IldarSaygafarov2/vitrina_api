@@ -109,6 +109,12 @@ class Advertisement(models.Model):
         for_moderation.save()
         return
 
+    def get_preview(self):
+        gallery = self.gallery.all()
+        if not gallery:
+            return ''
+        return gallery.first().photo.url
+
     class Meta:
         verbose_name = 'Объявление'
         verbose_name_plural = 'Объявления'

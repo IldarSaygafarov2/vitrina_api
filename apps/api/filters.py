@@ -6,9 +6,13 @@ from .models import Advertisement
 
 class AdvertisementFilter(FilterSet):
     repair_type = ChoiceField()
-    rooms_qty_from = NumberFilter(lookup_expr='gte', field_name='rooms_qty_from')
-    rooms_qty_to = NumberFilter(lookup_expr='lte', field_name='rooms_qty_to')
+    floor_from = NumberFilter(lookup_expr='gte', field_name='floor_from')
+    floor_to = NumberFilter(lookup_expr='lte', field_name='floor_to')
+    quadrature_from = NumberFilter(lookup_expr='gte', field_name='quadrature_from')
+    quadrature_to = NumberFilter(lookup_expr='lte', field_name='quadrature_to')
+    price_from = NumberFilter(lookup_expr='gte', field_name='price')
+    price_to = NumberFilter(lookup_expr='lte', field_name='price')
 
     class Meta:
         model = Advertisement
-        fields = ['auction_allowed', 'category', 'repair_type', 'property_type', 'district', 'user']
+        fields = ['category', 'repair_type', 'property_type', 'district', 'is_studio']

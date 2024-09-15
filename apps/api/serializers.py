@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from apps.users.serializers import SimpleUserSerializer
 from . import models
 
 
@@ -20,8 +21,16 @@ class CategorySerializer(serializers.ModelSerializer):
         fields = ['id', 'name', 'slug']
 
 
+class AdvertisementListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Advertisement
+        fields = ['id', 'price', 'address', 'rooms_qty_from', 'rooms_qty_to',
+                  'quadrature_from', 'quadrature_to', 'floor_from', 'floor_to']
+
+
 class AdvertisementSerializer(serializers.ModelSerializer):
     gallery = AdvertisementGallerySerializer(many=True, required=False)
+    user = SimpleUserSerializer(read_only=True, many=False)
 
     class Meta:
         model = models.Advertisement

@@ -26,6 +26,7 @@ class AdvertisementViewSet(viewsets.ModelViewSet):
     pagination_class = LimitOffsetPagination
 
 
+
 @extend_schema(tags=['Категории'])
 class CategoryViewSet(viewsets.ModelViewSet):
     queryset = models.Category.objects.all()
