@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from apps.users.serializers import SimpleUserSerializer
 from . import models
+import random
 
 
 class AdvertisementGallerySerializer(serializers.ModelSerializer):
@@ -22,15 +23,20 @@ class CategorySerializer(serializers.ModelSerializer):
 
 
 class AdvertisementListSerializer(serializers.ModelSerializer):
+    preview = serializers.SerializerMethodField(method_name='get_preview')
+
     class Meta:
         model = models.Advertisement
         fields = ['id', 'price', 'address', 'rooms_qty_from', 'rooms_qty_to',
-                  'quadrature_from', 'quadrature_to', 'floor_from', 'floor_to']
+                  'quadrature_from', 'quadrature_to', 'floor_from', 'floor_to', 'preview']
 
+    def get_preview(self, obj) -> str:
+        return obj.get_preview()
 
 class AdvertisementSerializer(serializers.ModelSerializer):
     gallery = AdvertisementGallerySerializer(many=True, required=False)
     user = SimpleUserSerializer(read_only=True, many=False)
+    related_objects = serializers.SerializerMethodField(method_name='get_related_objects')
 
     class Meta:
         model = models.Advertisement
@@ -56,7 +62,14 @@ class AdvertisementSerializer(serializers.ModelSerializer):
             'category',
             'user',
             'gallery',
+            'related_objects',
         ]
+
+    def get_related_objects(self, obj) -> list:
+        qs = models.Advertisement.objects.filter(property_type=obj.property_type)
+        qs = random.sample(list(qs), 3)
+        serializer = AdvertisementListSerializer(qs, many=True)
+        return serializer.data
 
     def get_property_type_display(self, obj) -> str:
         return obj.get_property_type_display()

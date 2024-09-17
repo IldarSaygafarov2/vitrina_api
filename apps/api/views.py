@@ -24,6 +24,11 @@ class AdvertisementViewSet(viewsets.ModelViewSet):
     filterset_class = AdvertisementFilter
     # filterset_fields = ['is_studio', 'category', 'operation_type', 'district', 'repair_type']
 
+    def get_serializer_class(self):
+        if self.action == 'list':
+            return serializers.AdvertisementListSerializer
+        return serializers.AdvertisementSerializer
+
 
 @extend_schema(tags=['Категории'])
 class CategoryViewSet(viewsets.ModelViewSet):
@@ -39,6 +44,7 @@ class UserRequestCreateView(generics.CreateAPIView):
     queryset = models.UserRequest.objects.all()
 
 
+@extend_schema(tags=['Галлерея'])
 class AdvertisementGalleryView(viewsets.ModelViewSet):
     queryset = models.AdvertisementGallery.objects.all()
     serializer_class = serializers.AdvertisementGallerySerializer
