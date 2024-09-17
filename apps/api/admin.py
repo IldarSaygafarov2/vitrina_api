@@ -29,7 +29,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 class UserRequestAdmin(admin.ModelAdmin):
-    list_display = ['id', 'first_name', 'email', 'phone_number', 'operation_type', 'object_type']
+    list_display = ['id', 'first_name', 'phone_number', 'operation_type', 'object_type']
     list_display_links = ['id', 'first_name']
 
 

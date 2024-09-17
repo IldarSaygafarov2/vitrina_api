@@ -2,10 +2,9 @@ from django_filters.rest_framework import DjangoFilterBackend
 from drf_spectacular.utils import extend_schema
 from rest_framework import viewsets, generics
 from rest_framework.pagination import LimitOffsetPagination
-from rest_framework.parsers import MultiPartParser, JSONParser
+from .filters import AdvertisementFilter
 
 from . import serializers, models
-from .filters import AdvertisementFilter
 
 
 @extend_schema(tags=['Районы'])
@@ -18,13 +17,12 @@ class DisrtrictViewSet(viewsets.ModelViewSet):
 
 @extend_schema(tags=['Объявления'])
 class AdvertisementViewSet(viewsets.ModelViewSet):
-    # parser_classes = (MultiPartParser, JSONParser)
     queryset = models.Advertisement.objects.all()
     serializer_class = serializers.AdvertisementSerializer
+    pagination_class = LimitOffsetPagination
     filter_backends = (DjangoFilterBackend,)
     filterset_class = AdvertisementFilter
-    pagination_class = LimitOffsetPagination
-
+    # filterset_fields = ['is_studio', 'category', 'operation_type', 'district', 'repair_type']
 
 
 @extend_schema(tags=['Категории'])

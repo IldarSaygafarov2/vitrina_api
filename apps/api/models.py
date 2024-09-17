@@ -4,6 +4,18 @@ from django.utils.text import slugify
 from apps.users.models import User
 
 
+class ObjectTypeChoices(models.TextChoices):
+    COMMERCIAL = 'commercial', 'Коммерческий'
+    HOUSE = 'house', 'Дом'
+    NEW_BUILDING = 'new_building', 'Новостройка'
+    FLAT = 'flat', 'Квартира'
+
+
+class OperationTypeChoices(models.TextChoices):
+    BUY = 'buy', 'Покупка'
+    RENT = 'rent', 'Аренда'
+
+
 class Category(models.Model):
     name = models.CharField(max_length=100, unique=True, verbose_name='Название')
     slug = models.SlugField(null=True)
@@ -39,15 +51,9 @@ class District(models.Model):
 
 
 class AdvertisementRequestForModeration(models.Model):
-    # class RequestStatus(models.TextChoices):
-    #     MODERATION = 'moderation', 'На модерации'
-    #     COMPLETED = 'completed', 'Прошло модерацию'
-
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, verbose_name='Риелтор')
     advertisement = models.ForeignKey("Advertisement", on_delete=models.CASCADE, related_name='requests')
     is_moderated = models.BooleanField(default=False, verbose_name='Прошла модерацию?')
-    # status = models.CharField(max_length=30, choices=RequestStatus.choices, default=RequestStatus.MODERATION,
-    #                           verbose_name='Статус объявления')
 
     def __str__(self):
         return f'Объявление {self.advertisement.name} от {self.user.first_name}'
@@ -56,7 +62,6 @@ class AdvertisementRequestForModeration(models.Model):
         verbose_name = 'Объявление для модерации'
         verbose_name_plural = 'Объявления для модерации'
         ordering = ('is_moderated',)
-
 
 
 class Advertisement(models.Model):
@@ -77,6 +82,8 @@ class Advertisement(models.Model):
     address = models.CharField(verbose_name='Адрес', max_length=200, null=True, blank=True)
     property_type = models.CharField(max_length=100, choices=PropertyTypeChoices.choices,
                                      verbose_name='Тип недвижимости')
+    operation_type = models.CharField(max_length=100, choices=OperationTypeChoices.choices,null=True, blank=True,
+                                      verbose_name='Тип операции', default=OperationTypeChoices.RENT)
     price = models.IntegerField(verbose_name='Цена')
     is_studio = models.BooleanField(verbose_name='Студия ?', default=False)
     rooms_qty_from = models.PositiveSmallIntegerField(verbose_name='Кол-во комнат от')
@@ -115,6 +122,11 @@ class Advertisement(models.Model):
             return ''
         return gallery.first().photo.url
 
+    def get_rooms_qty(self):
+        # if self.property_type == 'old':
+        #     return 0
+        return self.rooms_qty_from, self.rooms_qty_to
+
     class Meta:
         verbose_name = 'Объявление'
         verbose_name_plural = 'Объявления'
@@ -127,10 +139,11 @@ class AdvertisementGallery(models.Model):
 
 class UserRequest(models.Model):
     first_name = models.CharField(verbose_name='Имя', max_length=100)
-    operation_type = models.CharField(verbose_name='Тип операции', max_length=100)
-    object_type = models.CharField(verbose_name='Тип объекта', max_length=100)
+    operation_type = models.CharField(verbose_name='Тип операции', max_length=100, choices=OperationTypeChoices.choices,
+                                      null=True, blank=True)
+    object_type = models.CharField(verbose_name='Тип объекта', max_length=100, choices=ObjectTypeChoices.choices,
+                                   null=True, blank=True)
     phone_number = models.CharField(verbose_name='Номер телефона', max_length=15)
-    email = models.EmailField(verbose_name='Email')
     message = models.TextField(verbose_name='Примечание')
 
     def __str__(self):

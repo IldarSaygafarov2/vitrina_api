@@ -41,6 +41,7 @@ class AdvertisementSerializer(serializers.ModelSerializer):
             'district',
             'address',
             'property_type',
+            'operation_type',
             'price',
             'rooms_qty_from',
             'rooms_qty_to',
@@ -79,7 +80,7 @@ class AdvertisementSerializer(serializers.ModelSerializer):
 class UserRequestSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.UserRequest
-        fields = ['id', 'first_name', 'operation_type', 'object_type', 'phone_number', 'email', 'message']
+        fields = ['id', 'first_name', 'operation_type', 'object_type', 'phone_number',  'message']
 
 
 class AdvertisementModeratedSerializer(serializers.ModelSerializer):
