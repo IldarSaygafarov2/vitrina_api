@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'django_filters',
     'drf_spectacular',
+    'django_dump_load_utf8',
 
     'apps.users.apps.UsersConfig',
     'apps.api.apps.ApiConfig',
