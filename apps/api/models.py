@@ -123,8 +123,6 @@ class Advertisement(models.Model):
         return gallery.first().photo.url
 
     def get_rooms_qty(self):
-        # if self.property_type == 'old':
-        #     return 0
         return self.rooms_qty_from, self.rooms_qty_to
 
     class Meta:

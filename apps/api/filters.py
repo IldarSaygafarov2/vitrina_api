@@ -10,7 +10,6 @@ class AdvertisementFilter(FilterSet):
     price_to = NumberFilter(lookup_expr='lte', field_name='price')
     floor_from = NumberFilter(lookup_expr='gte', field_name='floor_from')
     floor_to = NumberFilter(lookup_expr='lte', field_name='floor_to')
-
     rooms = CharFilter(lookup_expr='in', method='get_rooms_in', label='кол-во комнат в')
 
     def get_rooms_in(self, queryset, field_name, value):
