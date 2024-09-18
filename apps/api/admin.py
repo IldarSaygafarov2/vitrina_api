@@ -40,8 +40,15 @@ class AdvertisementRequestForModerationAdmin(admin.ModelAdmin):
     list_filter = ['is_moderated']
 
 
+class ConsultationRequestAdmin(admin.ModelAdmin):
+    list_display = ['id', 'fullname', 'phone_number']
+    list_display_links = ['id', 'fullname']
+    list_filter = ['created_at']
+
+
 admin.site.register(models.Advertisement, AdvertisementAdmin)
 admin.site.register(models.District, DistrictAdmin)
 admin.site.register(models.Category, CategoryAdmin)
 admin.site.register(models.UserRequest, UserRequestAdmin)
 admin.site.register(models.AdvertisementRequestForModeration, AdvertisementRequestForModerationAdmin)
+admin.site.register(models.ConsultationRequest, ConsultationRequestAdmin)

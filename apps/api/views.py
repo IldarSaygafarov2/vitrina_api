@@ -48,3 +48,9 @@ class UserRequestCreateView(generics.CreateAPIView):
 class AdvertisementGalleryView(viewsets.ModelViewSet):
     queryset = models.AdvertisementGallery.objects.all()
     serializer_class = serializers.AdvertisementGallerySerializer
+
+
+@extend_schema(tags=['Заявки на косультацию'])
+class ConsultationRequestCreateView(generics.CreateAPIView):
+    serializer_class = serializers.ConsultationRequestSerializer
+    queryset = models.ConsultationRequest.objects.all()

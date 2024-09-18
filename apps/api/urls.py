@@ -14,6 +14,7 @@ advertisement_router.register('gallery', views.AdvertisementGalleryView)
 
 urlpatterns = [
     path('request/add/', views.UserRequestCreateView.as_view()),
+    path('consultation/create/', views.ConsultationRequestCreateView.as_view())
 ]
 
 urlpatterns += router.urls + advertisement_router.urls

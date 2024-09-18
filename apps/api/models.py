@@ -152,3 +152,14 @@ class UserRequest(models.Model):
         verbose_name_plural = 'Заявки пользователей'
 
 
+class ConsultationRequest(models.Model):
+    fullname = models.CharField(verbose_name='ФИО', max_length=100)
+    phone_number = models.CharField(verbose_name='Номер телефона', max_length=15)
+    created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+
+    def __str__(self):
+        return self.fullname
+
+    class Meta:
+        verbose_name = 'Заявка на консультацию'
+        verbose_name_plural = 'Заявки на консультацию'

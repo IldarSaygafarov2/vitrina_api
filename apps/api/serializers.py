@@ -33,6 +33,7 @@ class AdvertisementListSerializer(serializers.ModelSerializer):
     def get_preview(self, obj) -> str:
         return obj.get_preview()
 
+
 class AdvertisementSerializer(serializers.ModelSerializer):
     gallery = AdvertisementGallerySerializer(many=True, required=False)
     user = SimpleUserSerializer(read_only=True, many=False)
@@ -93,10 +94,16 @@ class AdvertisementSerializer(serializers.ModelSerializer):
 class UserRequestSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.UserRequest
-        fields = ['id', 'first_name', 'operation_type', 'object_type', 'phone_number',  'message']
+        fields = ['id', 'first_name', 'operation_type', 'object_type', 'phone_number', 'message']
 
 
 class AdvertisementModeratedSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.AdvertisementRequestForModeration
         fields = ['pk', 'user', 'advertisement', 'is_moderated']
+
+
+class ConsultationRequestSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.ConsultationRequest
+        fields = ['id', 'fullname', 'phone_number']
