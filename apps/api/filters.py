@@ -31,4 +31,4 @@ class AdvertisementFilter(FilterSet):
     class Meta:
         model = Advertisement
         fields = ['category', 'repair_type', 'property_type', 'district', 'is_studio', 'operation_type',
-                  'rooms']
+                  'rooms', 'user']

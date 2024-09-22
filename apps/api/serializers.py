@@ -28,7 +28,7 @@ class AdvertisementListSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Advertisement
         fields = ['id', 'price', 'address', 'rooms_qty_from', 'rooms_qty_to',
-                  'quadrature_from', 'quadrature_to', 'floor_from', 'floor_to', 'preview']
+                  'quadrature_from', 'quadrature_to', 'floor_from', 'floor_to', 'preview', 'user']
 
     def get_preview(self, obj) -> str:
         return obj.get_preview()
@@ -36,7 +36,6 @@ class AdvertisementListSerializer(serializers.ModelSerializer):
 
 class AdvertisementSerializer(serializers.ModelSerializer):
     gallery = AdvertisementGallerySerializer(many=True, required=False)
-    user = SimpleUserSerializer(read_only=True, many=False)
     related_objects = serializers.SerializerMethodField(method_name='get_related_objects')
 
     class Meta:
@@ -66,9 +65,11 @@ class AdvertisementSerializer(serializers.ModelSerializer):
             'related_objects',
         ]
 
+        read_only_fields = ['related_objects']
+
     def get_related_objects(self, obj) -> list:
         qs = models.Advertisement.objects.filter(property_type=obj.property_type)
-        qs = random.sample(list(qs), 3)
+        qs = random.sample(list(qs), len(qs))
         serializer = AdvertisementListSerializer(qs, many=True)
         return serializer.data
 

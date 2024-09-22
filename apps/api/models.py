@@ -56,7 +56,7 @@ class AdvertisementRequestForModeration(models.Model):
     is_moderated = models.BooleanField(default=False, verbose_name='Прошла модерацию?')
 
     def __str__(self):
-        return f'Объявление {self.advertisement.name} от {self.user.first_name}'
+        return f'Объявление {self.advertisement.name} от {self.user}'
 
     class Meta:
         verbose_name = 'Объявление для модерации'
