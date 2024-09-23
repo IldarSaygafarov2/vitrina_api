@@ -1,22 +1,28 @@
-from rest_framework.decorators import api_view
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import generics, viewsets
 from rest_framework.response import Response
-from rest_framework import generics
-
+from apps.api.models import Advertisement
+from apps.api.serializers import AdvertisementSerializer
 from .models import User
 from .serializers import IsUserRealtorSerializer, UserIdSerializer, UserSerializer
-from django_filters.rest_framework import DjangoFilterBackend
 
 
-class UserListView(generics.ListAPIView):
+class UserListView(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     filter_backends = (DjangoFilterBackend,)
     filterset_fields = ('user_type',)
 
 
-@api_view(['GET'])
-def users_api_root(request):
-    return Response({'message': 'working'})
+class RealtorAdvertisementListView(generics.ListAPIView):
+    serializer_class = AdvertisementSerializer
+    queryset = Advertisement.objects.all()
+
+    def get_queryset(self):
+        return self.queryset.filter(user=self.kwargs['pk'])
+
+    def get_serializer_context(self):
+        return {'request': self.request}
 
 
 class UserTypeRetrieveView(generics.RetrieveAPIView):

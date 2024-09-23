@@ -29,6 +29,9 @@ class AdvertisementViewSet(viewsets.ModelViewSet):
             return serializers.AdvertisementListSerializer
         return serializers.AdvertisementSerializer
 
+    def get_serializer_context(self):
+        return {'request': self.request}
+
 
 @extend_schema(tags=['Категории'])
 class CategoryViewSet(viewsets.ModelViewSet):

@@ -2,6 +2,7 @@ from rest_framework import serializers
 from apps.users.serializers import SimpleUserSerializer
 from . import models
 import random
+from django.conf import settings
 
 
 class AdvertisementGallerySerializer(serializers.ModelSerializer):
@@ -31,7 +32,9 @@ class AdvertisementListSerializer(serializers.ModelSerializer):
                   'quadrature_from', 'quadrature_to', 'floor_from', 'floor_to', 'preview', 'user']
 
     def get_preview(self, obj) -> str:
-        return obj.get_preview()
+        request = self.context.get('request')
+        image_url = request.build_absolute_uri(obj.get_preview()) if obj.get_preview() else ""
+        return image_url
 
 
 class AdvertisementSerializer(serializers.ModelSerializer):
@@ -70,7 +73,7 @@ class AdvertisementSerializer(serializers.ModelSerializer):
     def get_related_objects(self, obj) -> list:
         qs = models.Advertisement.objects.filter(property_type=obj.property_type)
         qs = random.sample(list(qs), len(qs))
-        serializer = AdvertisementListSerializer(qs, many=True)
+        serializer = AdvertisementListSerializer(qs, many=True, context={'request': self.context.get('request')})
         return serializer.data
 
     def get_property_type_display(self, obj) -> str:
