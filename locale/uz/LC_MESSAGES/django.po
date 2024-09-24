@@ -1,0 +1,75 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-09-24 09:38+0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: apps/api/models.py:9
+msgid "Коммерческий"
+msgstr ""
+
+#: apps/api/models.py:10
+msgid "Дом"
+msgstr ""
+
+#: apps/api/models.py:11 apps/api/models.py:70
+msgid "Новостройка"
+msgstr ""
+
+#: apps/api/models.py:12
+msgid "Квартира"
+msgstr ""
+
+#: apps/api/models.py:16
+msgid "Покупка"
+msgstr ""
+
+#: apps/api/models.py:17
+msgid "Аренда"
+msgstr ""
+
+#: apps/api/models.py:71
+msgid "Вторичный фонд"
+msgstr ""
+
+#: apps/api/models.py:74
+msgid "С ремонтом"
+msgstr ""
+
+#: apps/api/models.py:75
+msgid "Без ремонта"
+msgstr ""
+
+#: apps/api/models.py:76
+msgid "Дизайнерский ремонт"
+msgstr ""
+
+#: apps/api/models.py:77
+msgid "Черновая"
+msgstr ""
+
+#: apps/api/models.py:78
+msgid "Предчистовая"
+msgstr ""
+
+#: vitrina/settings.py:152
+msgid "Russian"
+msgstr ""
+
+#: vitrina/settings.py:153
+msgid "Uzbek"
+msgstr ""

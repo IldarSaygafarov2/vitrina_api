@@ -1,8 +1,8 @@
-from rest_framework import serializers
-from apps.users.serializers import SimpleUserSerializer
-from . import models
 import random
-from django.conf import settings
+
+from rest_framework import serializers
+
+from . import models
 
 
 class AdvertisementGallerySerializer(serializers.ModelSerializer):

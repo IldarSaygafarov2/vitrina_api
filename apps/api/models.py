@@ -2,18 +2,19 @@ from django.db import models
 from django.utils.text import slugify
 
 from apps.users.models import User
+from django.utils.translation import gettext as _
 
 
 class ObjectTypeChoices(models.TextChoices):
-    COMMERCIAL = 'commercial', 'Коммерческий'
-    HOUSE = 'house', 'Дом'
-    NEW_BUILDING = 'new_building', 'Новостройка'
-    FLAT = 'flat', 'Квартира'
+    COMMERCIAL = 'commercial', _('Коммерческий')
+    HOUSE = 'house', _('Дом')
+    NEW_BUILDING = 'new_building', _('Новостройка')
+    FLAT = 'flat', _('Квартира')
 
 
 class OperationTypeChoices(models.TextChoices):
-    BUY = 'buy', 'Покупка'
-    RENT = 'rent', 'Аренда'
+    BUY = 'buy', _('Покупка')
+    RENT = 'rent', _('Аренда')
 
 
 class Category(models.Model):
@@ -66,15 +67,15 @@ class AdvertisementRequestForModeration(models.Model):
 
 class Advertisement(models.Model):
     class PropertyTypeChoices(models.TextChoices):
-        NEW = 'new', 'Новостройка'
-        OLD = 'old', 'Вторичный фонд'
+        NEW = 'new', _('Новостройка')
+        OLD = 'old', _('Вторичный фонд')
 
     class RepairTypeChoices(models.TextChoices):
-        WITH = 'with', 'С ремонтом'
-        WITHOUT = 'without', 'Без ремонта'
-        DESIGNED = 'designed', 'Дизайнерский ремонт'
-        ROUGH = 'rough', 'Черновая'
-        PRE_FINISHED = 'pre_finished', 'Предчистовая'
+        WITH = 'with', _('С ремонтом')
+        WITHOUT = 'without', _('Без ремонта')
+        DESIGNED = 'designed', _('Дизайнерский ремонт')
+        ROUGH = 'rough', _('Черновая')
+        PRE_FINISHED = 'pre_finished', _('Предчистовая')
 
     name = models.CharField(max_length=100, verbose_name='Заголовок')
     description = models.TextField(verbose_name='Описание')

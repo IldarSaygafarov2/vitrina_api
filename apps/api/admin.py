@@ -1,5 +1,5 @@
 from django.contrib import admin
-
+from modeltranslation.admin import TranslationAdmin, TranslationTabularInline
 from . import models
 
 
@@ -8,7 +8,7 @@ class AdvertisementGalleryAdmin(admin.TabularInline):
     extra = 1
 
 
-class AdvertisementAdmin(admin.ModelAdmin):
+class AdvertisementAdmin(TranslationAdmin):
     list_display = ['id', 'name', 'price', 'repair_type', 'district', 'category', 'property_type', 'user']
     list_display_links = ['id', 'name']
     list_filter = ['repair_type', 'district', 'auction_allowed', 'property_type', 'category']
@@ -16,13 +16,13 @@ class AdvertisementAdmin(admin.ModelAdmin):
     inlines = [AdvertisementGalleryAdmin]
 
 
-class DistrictAdmin(admin.ModelAdmin):
-    list_display = ['id', 'name']
+class DistrictAdmin(TranslationAdmin):
+    list_display = ['id', 'name', 'name_uz']
     list_display_links = ['id', 'name']
     prepopulated_fields = {'slug': ('name',)}
 
 
-class CategoryAdmin(admin.ModelAdmin):
+class CategoryAdmin(TranslationAdmin):
     list_display = ['id', 'name']
     list_display_links = ['id', 'name']
     prepopulated_fields = {'slug': ('name',)}
