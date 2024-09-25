@@ -83,7 +83,7 @@ class Advertisement(models.Model):
     address = models.CharField(verbose_name='Адрес', max_length=200, null=True, blank=True)
     property_type = models.CharField(max_length=100, choices=PropertyTypeChoices.choices,
                                      verbose_name='Тип недвижимости')
-    operation_type = models.CharField(max_length=100, choices=OperationTypeChoices.choices,null=True, blank=True,
+    operation_type = models.CharField(max_length=100, choices=OperationTypeChoices.choices, null=True, blank=True,
                                       verbose_name='Тип операции', default=OperationTypeChoices.RENT)
     price = models.IntegerField(verbose_name='Цена')
     is_studio = models.BooleanField(verbose_name='Студия ?', default=False)

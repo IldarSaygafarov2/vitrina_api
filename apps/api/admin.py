@@ -9,15 +9,15 @@ class AdvertisementGalleryAdmin(admin.TabularInline):
 
 
 class AdvertisementAdmin(TranslationAdmin):
-    list_display = ['id', 'name', 'price', 'repair_type', 'district', 'category', 'property_type', 'user']
-    list_display_links = ['id', 'name']
-    list_filter = ['repair_type', 'district', 'auction_allowed', 'property_type', 'category']
-    list_editable = ['repair_type', 'district', 'user', 'property_type', 'category']
+    list_display = ['id', 'name', 'price', 'category', 'district', 'property_type', 'repair_type']
+    list_display_links = ['name', 'id']
+    list_filter = ['district', 'property_type', 'category', 'repair_type']
+    list_editable = ['price']
     inlines = [AdvertisementGalleryAdmin]
 
 
 class DistrictAdmin(TranslationAdmin):
-    list_display = ['id', 'name', 'name_uz']
+    list_display = ['id', 'name']
     list_display_links = ['id', 'name']
     prepopulated_fields = {'slug': ('name',)}
 

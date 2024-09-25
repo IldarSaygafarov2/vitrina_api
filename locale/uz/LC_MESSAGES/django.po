@@ -20,27 +20,27 @@ msgstr ""
 
 #: apps/api/models.py:9
 msgid "Коммерческий"
-msgstr ""
+msgstr "Tijorat"
 
 #: apps/api/models.py:10
 msgid "Дом"
-msgstr ""
+msgstr "Uy"
 
 #: apps/api/models.py:11 apps/api/models.py:70
 msgid "Новостройка"
-msgstr ""
+msgstr "Yangi bino"
 
 #: apps/api/models.py:12
 msgid "Квартира"
-msgstr ""
+msgstr "Kvartira"
 
 #: apps/api/models.py:16
 msgid "Покупка"
-msgstr ""
+msgstr "Sotib olish"
 
 #: apps/api/models.py:17
 msgid "Аренда"
-msgstr ""
+msgstr "Ijara"
 
 #: apps/api/models.py:71
 msgid "Вторичный фонд"
@@ -48,23 +48,23 @@ msgstr ""
 
 #: apps/api/models.py:74
 msgid "С ремонтом"
-msgstr ""
+msgstr "Yangilangan"
 
 #: apps/api/models.py:75
 msgid "Без ремонта"
-msgstr ""
+msgstr "Ta'mirsiz"
 
 #: apps/api/models.py:76
 msgid "Дизайнерский ремонт"
-msgstr ""
+msgstr "Dizayner ta'mirlash"
 
 #: apps/api/models.py:77
 msgid "Черновая"
-msgstr ""
+msgstr "Qoralama"
 
 #: apps/api/models.py:78
 msgid "Предчистовая"
-msgstr ""
+msgstr "Oldindan tugatish"
 
 #: vitrina/settings.py:152
 msgid "Russian"

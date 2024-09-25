@@ -64,6 +64,7 @@ class AdvertisementSerializer(serializers.ModelSerializer):
             'creation_year',
             'category',
             'user',
+            'is_moderated',
             'gallery',
             'related_objects',
         ]
