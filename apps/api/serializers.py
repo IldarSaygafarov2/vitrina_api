@@ -56,6 +56,7 @@ class AdvertisementSerializer(serializers.ModelSerializer):
             'rooms_qty_to',
             'quadrature_from',
             'quadrature_to',
+            'house_quadrature',
             'floor_from',
             'floor_to',
             'repair_type',

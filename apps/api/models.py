@@ -102,6 +102,7 @@ class Advertisement(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='advertisements',
                              verbose_name='Риелтор')
     is_moderated = models.BooleanField(verbose_name='Прошла модерацию?', default=False)
+    house_quadrature = models.IntegerField(verbose_name='Общая площадь участка', null=True, blank=True)
 
     def __str__(self):
         return self.name
