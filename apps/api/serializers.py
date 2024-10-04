@@ -78,10 +78,12 @@ class AdvertisementSerializer(serializers.ModelSerializer):
         serializer = AdvertisementListSerializer(qs, many=True, context={'request': self.context.get('request')})
         return serializer.data
 
-    def get_property_type_display(self, obj) -> str:
+    @staticmethod
+    def get_property_type_display(obj) -> str:
         return obj.get_property_type_display()
 
-    def get_repair_type_display(self, obj) -> str:
+    @staticmethod
+    def get_repair_type_display(obj) -> str:
         return obj.get_repair_type_display()
 
     def to_representation(self, instance):
