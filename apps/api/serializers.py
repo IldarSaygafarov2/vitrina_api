@@ -28,7 +28,7 @@ class AdvertisementListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.Advertisement
-        fields = ['id', 'price', 'address', 'rooms_qty_from', 'rooms_qty_to',
+        fields = ['id', 'name', 'price', 'address', 'rooms_qty_from', 'rooms_qty_to',
                   'quadrature_from', 'quadrature_to', 'floor_from', 'floor_to', 'preview', 'user']
 
     def get_preview(self, obj) -> str:
