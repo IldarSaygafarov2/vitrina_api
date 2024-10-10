@@ -136,6 +136,10 @@ class AdvertisementGallery(models.Model):
     advertisement = models.ForeignKey(Advertisement, on_delete=models.CASCADE, related_name='gallery')
     photo = models.ImageField(verbose_name='Фото', upload_to='gallery')
 
+    class Meta:
+        verbose_name = 'Фото объявления'
+        verbose_name_plural = 'Фото объявлений'
+
 
 class UserRequest(models.Model):
     first_name = models.CharField(verbose_name='Имя', max_length=100)
