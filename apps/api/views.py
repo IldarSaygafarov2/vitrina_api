@@ -2,9 +2,9 @@ from django_filters.rest_framework import DjangoFilterBackend
 from drf_spectacular.utils import extend_schema
 from rest_framework import viewsets, generics
 from rest_framework.pagination import LimitOffsetPagination
-from .filters import AdvertisementFilter
 
 from . import serializers, models
+from .filters import AdvertisementFilter
 
 
 @extend_schema(tags=['Районы'])
@@ -22,6 +22,7 @@ class AdvertisementViewSet(viewsets.ModelViewSet):
     pagination_class = LimitOffsetPagination
     filter_backends = (DjangoFilterBackend,)
     filterset_class = AdvertisementFilter
+
     # filterset_fields = ['is_studio', 'category', 'operation_type', 'district', 'repair_type']
 
     def get_serializer_class(self):
@@ -57,3 +58,10 @@ class AdvertisementGalleryView(viewsets.ModelViewSet):
 class ConsultationRequestCreateView(generics.CreateAPIView):
     serializer_class = serializers.ConsultationRequestSerializer
     queryset = models.ConsultationRequest.objects.all()
+
+
+# @extend_schema(tags=['Модерация объявлений'])
+# class AdvertisementModerationView(viewsets.ModelViewSet):
+#     queryset = models.AdvertisementModeration.objects.all()
+#     serializer_class = serializers.AdvertisementModerationSerializer
+

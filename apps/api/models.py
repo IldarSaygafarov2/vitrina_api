@@ -55,6 +55,7 @@ class AdvertisementRequestForModeration(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, verbose_name='Риелтор')
     advertisement = models.ForeignKey("Advertisement", on_delete=models.CASCADE, related_name='requests')
     is_moderated = models.BooleanField(default=False, verbose_name='Прошла модерацию?')
+    rejection_reason = models.TextField(verbose_name='Причина отказа', blank=True, null=True)
 
     def __str__(self):
         return f'Объявление {self.advertisement.name} от {self.user}'
@@ -109,13 +110,14 @@ class Advertisement(models.Model):
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
-        for_moderation = AdvertisementRequestForModeration(
+        for_moderation_obj, created = AdvertisementRequestForModeration.objects.get_or_create(
             user=self.user,
-            advertisement_id=self.pk,
-            is_moderated=False
+            advertisement=self,
         )
+        if not created:
+            for_moderation_obj.is_moderated = self.is_moderated
 
-        for_moderation.save()
+        for_moderation_obj.save()
         return
 
     def get_preview(self):

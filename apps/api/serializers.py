@@ -2,8 +2,8 @@ import random
 
 from rest_framework import serializers
 
-from . import models
 from apps.users.serializers import UserAdvertisementSerializer
+from . import models
 
 
 class AdvertisementGallerySerializer(serializers.ModelSerializer):
@@ -117,3 +117,9 @@ class ConsultationRequestSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.ConsultationRequest
         fields = ['id', 'fullname', 'phone_number']
+
+
+# class AdvertisementModerationSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = models.AdvertisementModeration
+#         fields = ['pk', 'realtor', 'advertisement', 'decline_reason']
