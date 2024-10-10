@@ -21,6 +21,17 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ['id', 'first_name', 'last_name', 'username', 'tg_username', 'phone_number', 'user_type']
 
 
+class UserAdvertisementSerializer(serializers.ModelSerializer):
+    fullname = serializers.SerializerMethodField(method_name='get_fullname')
+    class Meta:
+        model = User
+        fields  = ['id', 'fullname', 'tg_username', 'phone_number', 'photo']
+
+    @staticmethod
+    def get_fullname(obj: User) -> str:
+        return obj.get_full_name()
+
+
 class SimpleUserSerializer(serializers.ModelSerializer):
     fullname = serializers.SerializerMethodField(method_name='get_full_name')
 

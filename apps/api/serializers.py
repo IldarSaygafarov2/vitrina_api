@@ -3,6 +3,7 @@ import random
 from rest_framework import serializers
 
 from . import models
+from apps.users.serializers import UserAdvertisementSerializer
 
 
 class AdvertisementGallerySerializer(serializers.ModelSerializer):
@@ -40,6 +41,7 @@ class AdvertisementListSerializer(serializers.ModelSerializer):
 class AdvertisementSerializer(serializers.ModelSerializer):
     gallery = AdvertisementGallerySerializer(many=True, required=False)
     related_objects = serializers.SerializerMethodField(method_name='get_related_objects')
+    user = UserAdvertisementSerializer(many=False)
 
     class Meta:
         model = models.Advertisement
