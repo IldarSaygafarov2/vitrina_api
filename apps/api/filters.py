@@ -1,5 +1,5 @@
-from django.db.models import QuerySet
 from django_filters.filterset import FilterSet, NumberFilter, CharFilter
+
 from .models import Advertisement
 
 
@@ -31,4 +31,4 @@ class AdvertisementFilter(FilterSet):
     class Meta:
         model = Advertisement
         fields = ['category', 'repair_type', 'property_type', 'district', 'is_studio', 'operation_type',
-                  'rooms', 'user', 'house_quadrature', 'is_moderated']
+                  'rooms', 'user', 'house_quadrature_from', 'house_quadrature_to', 'is_moderated']
