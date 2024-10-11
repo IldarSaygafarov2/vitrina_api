@@ -10,6 +10,8 @@ class AdvertisementFilter(FilterSet):
     price_to = NumberFilter(lookup_expr='lte', field_name='price')
     floor_from = NumberFilter(lookup_expr='gte', field_name='floor_from')
     floor_to = NumberFilter(lookup_expr='lte', field_name='floor_to')
+    house_quadrature_from = NumberFilter(lookup_expr='gte', field_name='house_quadrature_from')
+    house_quadrature_to = NumberFilter(lookup_expr='lte', field_name='house_quadrature_to')
     rooms = CharFilter(lookup_expr='in', method='get_rooms_in', label='кол-во комнат в')
 
     def get_rooms_in(self, queryset, field_name, value):
@@ -31,4 +33,4 @@ class AdvertisementFilter(FilterSet):
     class Meta:
         model = Advertisement
         fields = ['category', 'repair_type', 'property_type', 'district', 'is_studio', 'operation_type',
-                  'rooms', 'user', 'house_quadrature_from', 'house_quadrature_to', 'is_moderated']
+                  'rooms', 'user', 'is_moderated']
