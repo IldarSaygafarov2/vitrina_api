@@ -4,6 +4,7 @@ from rest_framework import serializers
 
 from apps.users.serializers import UserAdvertisementSerializer
 from . import models
+from apps.users.models import User
 
 
 class AdvertisementGallerySerializer(serializers.ModelSerializer):
@@ -41,7 +42,6 @@ class AdvertisementListSerializer(serializers.ModelSerializer):
 class AdvertisementSerializer(serializers.ModelSerializer):
     gallery = AdvertisementGallerySerializer(many=True, required=False)
     related_objects = serializers.SerializerMethodField(method_name='get_related_objects')
-    user = UserAdvertisementSerializer(many=False)
 
     class Meta:
         model = models.Advertisement
@@ -93,10 +93,13 @@ class AdvertisementSerializer(serializers.ModelSerializer):
         data = super().to_representation(instance)
         district = models.District.objects.get(id=instance.district.id)
         category = models.Category.objects.get(id=instance.category.id)
+        user = User.objects.get(id=instance.user.id)
         district_serializer = DistrictSerializer(district)
         category_serializer = CategorySerializer(category)
+        user_serializer = UserAdvertisementSerializer(user)
         data['district'] = district_serializer.data
         data['category'] = category_serializer.data
+        data['user'] = user_serializer.data
         data['repair_type'] = instance.get_repair_type_display()
         data['property_type'] = instance.get_property_type_display()
         return data
