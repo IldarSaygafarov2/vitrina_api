@@ -53,6 +53,9 @@ class AdvertisementGalleryView(viewsets.ModelViewSet):
     queryset = models.AdvertisementGallery.objects.all()
     serializer_class = serializers.AdvertisementGallerySerializer
 
+    def get_queryset(self):
+        return self.queryset.filter(advertisement_id=self.kwargs['advertisement_pk'])
+
 
 @extend_schema(tags=['Заявки на косультацию'])
 class ConsultationRequestCreateView(generics.CreateAPIView):
