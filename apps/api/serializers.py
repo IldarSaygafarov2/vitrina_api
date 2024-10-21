@@ -114,7 +114,8 @@ class UserRequestSerializer(serializers.ModelSerializer):
 class AdvertisementModeratedSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.AdvertisementRequestForModeration
-        fields = ['pk', 'user', 'advertisement', 'is_moderated']
+        fields = ['pk', 'user', 'advertisement', 'rejection_reason']
+        read_only_fields = ['user', 'advertisement']
 
 
 class ConsultationRequestSerializer(serializers.ModelSerializer):

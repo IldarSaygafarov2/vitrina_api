@@ -43,12 +43,12 @@ class RealtorAdvertisementOnModerationView(viewsets.ModelViewSet):
         return self.queryset.filter(user=self.kwargs['user_pk'])
 
 
-class RealtorAdvertisementsOnModerationView(generics.RetrieveUpdateAPIView):
-    queryset = AdvertisementRequestForModeration.objects.all()
-    serializer_class = AdvertisementModeratedSerializer
-
-    def get_queryset(self):
-        print(self.kwargs)
+# class RealtorAdvertisementsOnModerationView(generics.RetrieveUpdateAPIView):
+#     queryset = AdvertisementRequestForModeration.objects.all()
+#     serializer_class = AdvertisementModeratedSerializer
+#
+#     def get_queryset(self):
+#         print(self.kwargs)
 
 
 @extend_schema(tags=['Пользователи'])
