@@ -18,7 +18,7 @@ class UserIdSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'first_name', 'last_name', 'username', 'tg_username', 'phone_number', 'user_type']
+        fields = ['id', 'first_name', 'last_name', 'username', 'tg_username', 'tg_user_id', 'phone_number', 'user_type']
 
 
 class UserAdvertisementSerializer(serializers.ModelSerializer):

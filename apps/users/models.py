@@ -13,6 +13,7 @@ class UserType(models.TextChoices):
 class User(AbstractUser):
     phone_number = models.CharField(max_length=15, verbose_name='Номер телефона', blank=True, null=True)
     tg_username = models.CharField(max_length=80, verbose_name='Юзернейм из телеграма', null=True)
+    tg_user_id = models.BigIntegerField(verbose_name='ID пользователя в телеграм', null=True)
     status = models.CharField(max_length=100, verbose_name='Статус', blank=True, null=True)
     user_type = models.CharField(max_length=100, choices=UserType.choices, null=True)
     photo = models.ImageField(verbose_name='Фото', upload_to='photos/%Y/%m', blank=True, null=True)
