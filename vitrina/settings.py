@@ -26,7 +26,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     '127.0.0.1',
-    'vitrinaapi.pythonanywhere.com'
+    'vitrinaapi.pythonanywhere.com',
+    '176.221.29.163'
 ]
 
 # Application definition
@@ -297,3 +298,7 @@ JAZZMIN_SETTINGS = {
     # Add a language dropdown into the admin
     "language_chooser": True,
 }
+
+CSRF_TRUSTED_ORIGINS = [
+    'http://176.221.29.163/'
+]
