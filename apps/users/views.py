@@ -1,10 +1,8 @@
-# from django_filters.rest_framework import DjangoFilterBackend
-# from apps.api.filters import AdvertisementFilter
-# from rest_framework.response import Response
-
 from django_filters.rest_framework import DjangoFilterBackend
 from drf_spectacular.utils import extend_schema
 from rest_framework import generics, viewsets
+from django.shortcuts import get_object_or_404
+from rest_framework.response import Response
 
 from apps.api.models import Advertisement, AdvertisementRequestForModeration
 from apps.api.serializers import AdvertisementSerializer, AdvertisementModeratedSerializer
@@ -56,6 +54,10 @@ class UserTypeRetrieveView(generics.RetrieveAPIView):
     queryset = User.objects.all()
     serializer_class = IsUserRealtorSerializer
     lookup_field = 'tg_username'
+
+    def retrieve(self, request, *args, **kwargs):
+        user = get_object_or_404(User, tg_username=self.kwargs['tg_username'])
+        return Response({'user_type': user.user_type})
 
 
 @extend_schema(tags=['Пользователи'])
