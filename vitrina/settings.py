@@ -27,7 +27,8 @@ DEBUG = True
 ALLOWED_HOSTS = [
     '127.0.0.1',
     'vitrinaapi.pythonanywhere.com',
-    '176.221.29.163'
+    '176.221.29.163',
+    'ivitrina-nedvizhimosti.com'
 ]
 
 # Application definition
@@ -300,5 +301,6 @@ JAZZMIN_SETTINGS = {
 }
 
 CSRF_TRUSTED_ORIGINS = [
-    'http://176.221.29.163/'
+    'http://176.221.29.163/',
+    'http://ivitrina-nedvizhimosti.com'
 ]
