@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-24 09:38+0500\n"
+"POT-Creation-Date: 2024-11-07 15:57+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,58 +18,58 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: apps/api/models.py:9
+#: .\apps\api\models.py:9
 msgid "Коммерческий"
 msgstr "Tijorat"
 
-#: apps/api/models.py:10
+#: .\apps\api\models.py:10
 msgid "Дом"
 msgstr "Uy"
 
-#: apps/api/models.py:11 apps/api/models.py:70
+#: .\apps\api\models.py:11 .\apps\api\models.py:71
 msgid "Новостройка"
 msgstr "Yangi bino"
 
-#: apps/api/models.py:12
+#: .\apps\api\models.py:12
 msgid "Квартира"
 msgstr "Kvartira"
 
-#: apps/api/models.py:16
+#: .\apps\api\models.py:16
 msgid "Покупка"
 msgstr "Sotib olish"
 
-#: apps/api/models.py:17
+#: .\apps\api\models.py:17
 msgid "Аренда"
 msgstr "Ijara"
 
-#: apps/api/models.py:71
+#: .\apps\api\models.py:72
 msgid "Вторичный фонд"
 msgstr ""
 
-#: apps/api/models.py:74
+#: .\apps\api\models.py:75
 msgid "С ремонтом"
-msgstr "Yangilangan"
+msgstr "Ta’mirlangan"
 
-#: apps/api/models.py:75
+#: .\apps\api\models.py:76
 msgid "Без ремонта"
 msgstr "Ta'mirsiz"
 
-#: apps/api/models.py:76
+#: .\apps\api\models.py:77
 msgid "Дизайнерский ремонт"
-msgstr "Dizayner ta'mirlash"
+msgstr "Dizaynerlik ta’mir"
 
-#: apps/api/models.py:77
+#: .\apps\api\models.py:78
 msgid "Черновая"
-msgstr "Qoralama"
+msgstr "Qora Suvoq"
 
-#: apps/api/models.py:78
+#: .\apps\api\models.py:79
 msgid "Предчистовая"
-msgstr "Oldindan tugatish"
+msgstr "Tugallanmagan ta’mir"
 
-#: vitrina/settings.py:152
+#: .\vitrina\settings.py:157
 msgid "Russian"
 msgstr ""
 
-#: vitrina/settings.py:153
+#: .\vitrina\settings.py:158
 msgid "Uzbek"
 msgstr ""
