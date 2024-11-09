@@ -6,8 +6,7 @@ from . import views
 router = routers.DefaultRouter()
 router.register(r'categories', views.CategoryViewSet)
 router.register(r'advertisements', views.AdvertisementViewSet)
-router.register(r'districts', views.DisrtrictViewSet)
-# router.register(r'advertisement_moderation', views.AdvertisementModerationView)
+router.register(r'districts', views.DistrictViewSet)
 
 advertisement_router = routers.NestedDefaultRouter(router, 'advertisements', lookup='advertisement')
 advertisement_router.register('gallery', views.AdvertisementGalleryView)

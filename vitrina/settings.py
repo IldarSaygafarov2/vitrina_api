@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'django_filters',
     'drf_spectacular',
     'django_dump_load_utf8',
+    # 'rest_framework_api_key',
 
     'apps.users.apps.UsersConfig',
     'apps.api.apps.ApiConfig',

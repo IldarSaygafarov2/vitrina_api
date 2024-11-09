@@ -8,7 +8,7 @@ from .filters import AdvertisementFilter
 
 
 @extend_schema(tags=['Районы'])
-class DisrtrictViewSet(viewsets.ModelViewSet):
+class DistrictViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.DistrictSerializer
     queryset = models.District.objects.all()
     lookup_field = 'slug'
