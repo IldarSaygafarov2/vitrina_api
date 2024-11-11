@@ -304,5 +304,5 @@ JAZZMIN_SETTINGS = {
 CSRF_TRUSTED_ORIGINS = [
     'http://176.221.29.163/',
     'https://ivitrina-nedvizhimosti.com',
-    'http://vitrina-admin.uz'
+    'https://vitrina-admin.uz'
 ]
