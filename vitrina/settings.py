@@ -28,6 +28,7 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
     'vitrinaapi.pythonanywhere.com',
     '176.221.29.163',
+    'vitrina-admin.uz'
 ]
 
 # Application definition
