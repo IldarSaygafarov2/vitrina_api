@@ -2,19 +2,30 @@ from django.db import models
 from django.utils.text import slugify
 
 from apps.users.models import User
-from django.utils.translation import gettext as _
 
 
 class ObjectTypeChoices(models.TextChoices):
-    COMMERCIAL = 'commercial', _('Коммерческий')
-    HOUSE = 'house', _('Дом')
-    NEW_BUILDING = 'new_building', _('Новостройка')
-    FLAT = 'flat', _('Квартира')
+    COMMERCIAL = 'commercial', 'Коммерческий'
+    HOUSE = 'house', 'Дом'
+    NEW_BUILDING = 'new_building', 'Новостройка'
+    FLAT = 'flat', 'Квартира'
+
+
+class ObjectTypeUzChoices(models.TextChoices):
+    COMMERCIAL = 'commercial', 'Tijorat'
+    HOUSE = 'house', 'Uy'
+    NEW_BUILDING = 'new_building', 'Yangi bino'
+    FLAT = 'flat', 'Kvartira'
 
 
 class OperationTypeChoices(models.TextChoices):
-    BUY = 'buy', _('Покупка')
-    RENT = 'rent', _('Аренда')
+    BUY = 'buy', 'Покупка'
+    RENT = 'rent', 'Аренда'
+
+
+class OperationTypeUzChoices(models.TextChoices):
+    BUY = 'buy', 'Sotib olish'
+    RENT = 'rent', 'Ijara'
 
 
 class Category(models.Model):
@@ -66,26 +77,65 @@ class AdvertisementRequestForModeration(models.Model):
         ordering = ('is_moderated',)
 
 
+class PropertyTypeChoices(models.TextChoices):
+    NEW = 'new', 'Новостройка'
+    OLD = 'old', 'Вторичный фонд'
+
+
+class PropertyTypeUzChoices(models.TextChoices):
+    NEW = 'new', 'Yangi bino'
+    OLD = 'old', 'Ikkilamchi fond'
+
+
+class RepairTypeChoices(models.TextChoices):
+    WITH = 'with', 'С ремонтом'
+    WITHOUT = 'without', 'Без ремонта'
+    DESIGNED = 'designed', 'Дизайнерский ремонт'
+    ROUGH = 'rough', 'Черновая'
+    PRE_FINISHED = 'pre_finished', 'Предчистовая'
+
+
+class RepairTypeUzChoices(models.TextChoices):
+    WITH = 'with', 'Ta’mirlangan'
+    WITHOUT = 'without', "Ta'mirsiz"
+    DESIGNED = 'designed', 'Dizaynerlik ta’mir'
+    ROUGH = 'rough', 'Qora Suvoq'
+    PRE_FINISHED = 'pre_finished', 'Tugallanmagan ta’mir'
+
+
 class Advertisement(models.Model):
-    class PropertyTypeChoices(models.TextChoices):
-        NEW = 'new', _('Новостройка')
-        OLD = 'old', _('Вторичный фонд')
-
-    class RepairTypeChoices(models.TextChoices):
-        WITH = 'with', _('С ремонтом')
-        WITHOUT = 'without', _('Без ремонта')
-        DESIGNED = 'designed', _('Дизайнерский ремонт')
-        ROUGH = 'rough', _('Черновая')
-        PRE_FINISHED = 'pre_finished', _('Предчистовая')
-
     name = models.CharField(max_length=100, verbose_name='Заголовок')
     description = models.TextField(verbose_name='Описание')
     district = models.ForeignKey(District, on_delete=models.CASCADE, related_name='districts', verbose_name='Район')
     address = models.CharField(verbose_name='Адрес', max_length=200, null=True, blank=True)
-    property_type = models.CharField(max_length=100, choices=PropertyTypeChoices.choices,
-                                     verbose_name='Тип недвижимости')
-    operation_type = models.CharField(max_length=100, choices=OperationTypeChoices.choices, null=True, blank=True,
-                                      verbose_name='Тип операции', default=OperationTypeChoices.RENT)
+
+    property_type = models.CharField(
+        max_length=100,
+        choices=PropertyTypeChoices.choices,
+        verbose_name='Тип недвижимости'
+    )
+    property_type_uz = models.CharField(
+        max_length=100,
+        choices=PropertyTypeUzChoices.choices,
+        verbose_name='Тип недвижимости',
+        blank=True,
+        null=True
+    )
+
+    operation_type = models.CharField(
+        max_length=100,
+        choices=OperationTypeChoices.choices,
+        null=True, blank=True,
+        verbose_name='Тип операции',
+        default=OperationTypeChoices.RENT
+    )
+    operation_type_uz = models.CharField(
+        max_length=100,
+        choices=OperationTypeUzChoices.choices,
+        null=True, blank=True,
+        verbose_name='Тип операции',
+        default=OperationTypeUzChoices.RENT
+    )
     price = models.IntegerField(verbose_name='Цена')
     is_studio = models.BooleanField(verbose_name='Студия ?', default=False)
     rooms_qty_from = models.PositiveSmallIntegerField(verbose_name='Кол-во комнат от')
@@ -94,8 +144,15 @@ class Advertisement(models.Model):
     quadrature_to = models.PositiveSmallIntegerField(verbose_name='Квадратура до')
     floor_from = models.PositiveSmallIntegerField(verbose_name='Этаж от')
     floor_to = models.PositiveSmallIntegerField(verbose_name='Этаж до')
+
     repair_type = models.CharField(verbose_name='Ремонт', max_length=100, choices=RepairTypeChoices.choices, null=True,
                                    blank=True)
+    repair_type_uz = models.CharField(
+        verbose_name='Ремонт', max_length=100, choices=RepairTypeUzChoices.choices,
+        null=True,
+        blank=True
+    )
+
     creation_year = models.IntegerField(verbose_name='Год постройки', default=0)
     auction_allowed = models.BooleanField(default=False, verbose_name='Торг уместен?')
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, related_name='advertisements',

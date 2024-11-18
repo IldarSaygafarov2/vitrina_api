@@ -16,9 +16,6 @@ class AdvertisementTranslationOptions(TranslationOptions):
         'name',
         'description',
         'address',
-        'property_type',
-        'operation_type',
-        'repair_type',
         'district',
         'category'
     )
