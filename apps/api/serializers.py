@@ -53,8 +53,6 @@ class AdvertisementSerializer(serializers.ModelSerializer):
             'address',
             'property_type',
             'property_type_uz',
-            'operation_type',
-            'operation_type_uz',
             'price',
             'rooms_qty_from',
             'rooms_qty_to',
@@ -83,15 +81,15 @@ class AdvertisementSerializer(serializers.ModelSerializer):
         serializer = AdvertisementListSerializer(qs, many=True, context={'request': self.context.get('request')})
         return serializer.data
 
-    @staticmethod
-    def get_property_type_display(obj) -> str:
-        return obj.get_property_type_display()
+    # @staticmethod
+    # def get_property_type_display(obj) -> str:
+    #     return obj.get_property_type_display()
+    #
+    # @staticmethod
+    # def get_repair_type_display(obj) -> str:
+    #     return obj.get_repair_type_display()
 
-    @staticmethod
-    def get_repair_type_display(obj) -> str:
-        return obj.get_repair_type_display()
-
-    def to_representation(self, instance):
+    def to_representation(self, instance: models.Advertisement):
         data = super().to_representation(instance)
         district = models.District.objects.get(id=instance.district.id)
         category = models.Category.objects.get(id=instance.category.id)
@@ -103,7 +101,9 @@ class AdvertisementSerializer(serializers.ModelSerializer):
         data['category'] = category_serializer.data
         data['user'] = user_serializer.data
         data['repair_type'] = instance.get_repair_type_display()
+        data['repair_type_uz'] = instance.get_repair_type_uz_display()
         data['property_type'] = instance.get_property_type_display()
+        data['property_type_uz'] = instance.get_property_type_uz_display()
         return data
 
 
